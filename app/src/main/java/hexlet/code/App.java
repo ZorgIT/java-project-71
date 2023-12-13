@@ -6,7 +6,9 @@ import picocli.CommandLine.Option;
 
 
 @Command(name = "gendiff", mixinStandardHelpOptions = true, version = "gendiff 1.0",
-        description = "Compares two configuration files and shows a difference.")
+        description = "Compares two configuration files and shows a " +
+                "difference. \n filepath1 path to first file \n filepath2 " +
+                "path to second file")
 public class App implements Runnable {
     @Option(names = {"-h", "--help"}, usageHelp = true, description = "Show this help message and exit.")
     boolean helpRequested;
