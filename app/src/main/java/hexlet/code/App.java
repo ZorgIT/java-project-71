@@ -22,7 +22,24 @@ public class App implements Runnable {
 
     @Override
     public void run() {
-        Differ.generate();
+        String json1 = "{\n" +
+                "  \"host\": \"hexlet.io\",\n" +
+                "  \"timeout\": 50,\n" +
+                "  \"proxy\": \"123.234.53.22\",\n" +
+                "  \"follow\": false\n" +
+                "}";
+        String json2 = "{\n" +
+                "  \"timeout\": 20,\n" +
+                "  \"verbose\": true,\n" +
+                "  \"host\": \"hexlet.io\"\n" +
+                "}";
+
+        try {
+            Differ.generate(json1, json2);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
         System.out.printf("Comparing two configuration files with format: " +
                 "%s%n", format);
     }
