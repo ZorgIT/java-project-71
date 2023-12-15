@@ -10,10 +10,13 @@ public class Differ {
         Map<String, Object> map1 = getData(json1);
         Map<String, Object> map2 = getData(json2);
         List<List<String>> result = checkData(map1, map2);
+
+        System.out.println("\n{");
         for (List<String> line : result) {
-            System.out.printf("%s %s: %s \n", line.get(0), line.get(1),
+            System.out.printf("  %s %s: %s \n", line.get(0), line.get(1),
                     line.get(2));
         }
+        System.out.println("}");
     }
 
     public static Map getData(String content) throws Exception {
