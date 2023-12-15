@@ -5,3 +5,5 @@
 
 
 ###Diff utill
+
+[![asciicast](https://asciinema.org/a/wnGxDPEPAglnz9Nmmd3js3Q6D.svg)](https://asciinema.org/a/wnGxDPEPAglnz9Nmmd3js3Q6D)
