@@ -4,12 +4,19 @@ import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 
 @Command(name = "gendiff", mixinStandardHelpOptions = true, version = "gendiff 1.0",
         description = "Compares two configuration files and shows a " +
-                "difference. \n \tfilepath1 \tpath to first file \n " +
-                "\tfilepath2 \tpath to second file")
+                "difference.")
 public class App implements Runnable {
+    @CommandLine.Parameters(index ="0", description = "Path to the first file")
+    private String filePath1;
+    @CommandLine.Parameters(index ="1", description = "Path to the second file")
+    private String filePath2;
 
     @Option(names = {"-f", "--format"}, description = "Output format " +
             "[default: stylish]")
@@ -22,26 +29,17 @@ public class App implements Runnable {
 
     @Override
     public void run() {
-        String json1 = "{\n" +
-                "  \"host\": \"hexlet.io\",\n" +
-                "  \"timeout\": 50,\n" +
-                "  \"proxy\": \"123.234.53.22\",\n" +
-                "  \"follow\": false\n" +
-                "}";
-        String json2 = "{\n" +
-                "  \"timeout\": 20,\n" +
-                "  \"verbose\": true,\n" +
-                "  \"host\": \"hexlet.io\"\n" +
-                "}";
-
         try {
-            Differ.generate(json1, json2);
-        } catch (Exception e) {
+            String file1 = readFile(filePath1);
+            String file2 = readFile(filePath2);
+            Differ.generate(file1, file2);
+        } catch (Exception e ){
             throw new RuntimeException(e);
         }
+    }
 
-        System.out.printf("Comparing two configuration files with format: " +
-                "%s%n", format);
+    private String readFile(String filePath) throws IOException {
+        return Files.readString(Paths.get(filePath));
     }
     public static void main(String[] args) {
         CommandLine commandLine = new CommandLine(new App());
