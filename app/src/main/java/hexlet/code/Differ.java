@@ -27,17 +27,6 @@ final class Differ {
         System.out.println("}");
     }
 
-//    public static Map<String, Object> getData(final String content) throws IOException {
-//        System.out.println("Parsing JSON data...");
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        Map<String, Object> map
-//                = objectMapper.readValue(content,
-//                new TypeReference<Map<String, Object>>() {
-//        });
-//        System.out.println("Parsing completed.");
-//        return map;
-//    }
-
     public static Map<String, Object> getData(final String content) {
         System.out.println("Received JSON content: " + content);
 
