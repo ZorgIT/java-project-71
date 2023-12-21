@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
@@ -26,14 +27,32 @@ final class Differ {
         System.out.println("}");
     }
 
-    public static Map getData(final String content) throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
-        Map<String, Object> map
-                = objectMapper.readValue(content,
-                new TypeReference<Map<String, Object>>() {
-        });
-        return map;
+//    public static Map<String, Object> getData(final String content) throws IOException {
+//        System.out.println("Parsing JSON data...");
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        Map<String, Object> map
+//                = objectMapper.readValue(content,
+//                new TypeReference<Map<String, Object>>() {
+//        });
+//        System.out.println("Parsing completed.");
+//        return map;
+//    }
+
+    public static Map<String, Object> getData(final String content) {
+        System.out.println("Received JSON content: " + content);
+
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            Map<String, Object> map = objectMapper.readValue(content, new TypeReference<Map<String, Object>>() {});
+            System.out.println("JSON parsed successfully.");
+            return map;
+        } catch (IOException e) {
+            System.out.println("Error parsing JSON: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
     }
+
 
     public static List lineAdd(final String val1, final String val2,
                                final Object val3) {
