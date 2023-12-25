@@ -2,6 +2,8 @@ plugins {
     id 'application'
     id 'checkstyle'
     id 'jacoco'
+    //https://github.com/radarsh/gradle-test-logger-plugin
+    id 'com.adarshr.test-logger' version '4.0.0'
 }
 
 application {
@@ -30,9 +32,33 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    testlogger {
+        theme 'standard-parallel' // task level
+    }
     finalizedBy jacocoTestReport // report is always generated after tests run
+
 }
 
 jacocoTestReport {
     dependsOn test // tests are required to run before generating the report
+}
+
+testlogger {
+    theme 'standard'
+    showExceptions true
+    showStackTraces true
+    showFullStackTraces false
+    showCauses true
+    slowThreshold 2000
+    showSummary true
+    showSimpleNames false
+    showPassed true
+    showSkipped true
+    showFailed true
+    showOnlySlow false
+    showStandardStreams false
+    showPassedStandardStreams true
+    showSkippedStandardStreams true
+    showFailedStandardStreams true
+    logLevel 'lifecycle'
 }
