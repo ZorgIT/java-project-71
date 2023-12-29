@@ -11,32 +11,21 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      - name: Set up working directory
-        run: cd $GITHUB_WORKSPACE/app
-        working-directory: $GITHUB_WORKSPACE/app
-      
+      - name: Set up working directory and run Make commands
+        run: |
+          cd $GITHUB_WORKSPACE/app
+          make setup
+          make clean
+          make build
+          make install
+          lint build
+        
       - uses: actions/setup-java@v3
         with:
           java-version: '20'
           distribution: 'temurin'
+      
       - uses: gradle/gradle-build-action@v2
         with:
           gradle-version: 8.4
-      - name: Install Make
-        run: sudo apt-get update && sudo apt-get install -y make
-
-      - name: Setup with Make
-        run: make setup
-        
-      - name: Clean with Make
-        run: make clean
-      
-      - name: Build with Make
-        run: make build        
-        
-      - name: Install with Make
-        run: make install      
-        
-      - name: Lint with Make
-        run: lint build  
         
