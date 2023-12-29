@@ -1,4 +1,5 @@
 .DEFAULT_GOAL := build-run
+.PHONY: build
 
 setup:
 	./gradlew wrapper --gradle-version 8.4
@@ -30,4 +31,3 @@ check-deps:
 
 build-run: build run
 
-.PHONY: build
