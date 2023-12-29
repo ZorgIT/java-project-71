@@ -52,7 +52,8 @@ public final class App implements Runnable {
         try {
             String file1 = readFile(filePath1);
             String file2 = readFile(filePath2);
-            showDiff(Differ.generate(file1, file2));
+            String[] contentType = file1.split(".");
+            showDiff(Differ.generate(file1, file2, contentType[1]));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -62,9 +63,9 @@ public final class App implements Runnable {
         return Files.readString(Paths.get(filePath));
     }
 
-    private void showDiff(List<List<String>> differnce) {
+    private void showDiff(List<List<String>> difference) {
         System.out.println("\n{");
-        for (List<String> line : differnce) {
+        for (List<String> line : difference) {
             System.out.printf("  %s %s: %s \n", line.get(0), line.get(1),
                     line.get(2));
         }

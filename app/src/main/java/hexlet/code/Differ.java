@@ -14,42 +14,36 @@ final class Differ {
     private Differ() {
     }
 
-    public static List<List<String>> generate(final String json1,
-                                              final String json2) {
-        Map<String, Object> map1 = getJsonData(json1);
-        Map<String, Object> map2 = getJsonData(json2);
+    public static List<List<String>> generate(final String file1,
+                                              final String file2,
+                                              final String contentType) {
+        Map<String, Object> map1 = parseData(file1, contentType);
+        Map<String, Object> map2 = parseData(file2, contentType);
         return checkData(map1, map2);
     }
 
-    public static Map<String, Object> getJsonData(final String content) {
-        System.out.println("Received JSON content: " + content);
+    public static Map<String, Object> parseData(final String content,
+                                                final String contentType) {
+        System.out.println("Received " + contentType + " content: " + content);
 
         try {
-            ObjectMapper objectMapper = new ObjectMapper();
+            ObjectMapper objectMapper;
+            if (contentType.equalsIgnoreCase("json")) {
+                objectMapper = new ObjectMapper();
+            } else if (contentType.equalsIgnoreCase("yml")) {
+                objectMapper = new YAMLMapper();
+            } else {
+                System.out.println("Unsupported content type: " + contentType);
+                return null;
+            }
+
             Map<String, Object> map = objectMapper.readValue(content,
                     new TypeReference<>() {
                     });
-            System.out.println("JSON parsed successfully.");
+            System.out.println(contentType.toUpperCase() + " parsed successfully.");
             return map;
         } catch (IOException e) {
-            System.out.println("Error parsing JSON: " + e.getMessage());
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public static Map<String, Object> getYmlData(final String content) {
-        System.out.println("Received Yml content: " + content);
-
-        try {
-            ObjectMapper objectMapper = new YAMLMapper();
-            Map<String, Object> map = objectMapper.readValue(content,
-                    new TypeReference<>() {
-                    });
-            System.out.println("YAML parsed successfully.");
-            return map;
-        } catch (IOException e) {
-            System.out.println("Error parsing YAML: " + e.getMessage());
+            System.out.println("Error parsing " + contentType + ": " + e.getMessage());
             e.printStackTrace();
             return null;
         }
@@ -75,11 +69,15 @@ final class Differ {
             Object oldValue = entryOld.getValue();
             String curKey = entryOld.getKey();
 
-            if (newValue.equals(oldValue)) {
-                lineStatus.add(lineAdd(" ", curKey, oldValue));
+            if (newValue != null) {
+                if (newValue.equals(oldValue)) {
+                    lineStatus.add(lineAdd(" ", curKey, oldValue));
+                } else {
+                    lineStatus.add(lineAdd("-", curKey, oldValue));
+                    lineStatus.add(lineAdd("+", curKey, newValue));
+                }
             } else {
                 lineStatus.add(lineAdd("-", curKey, oldValue));
-                lineStatus.add(lineAdd("+", curKey, newValue));
             }
         }
 
