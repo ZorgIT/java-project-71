@@ -20,13 +20,13 @@ public final class App implements Runnable {
      */
     @CommandLine.Parameters(index = "0",
             description = "Path to the first file")
-    private String filePath1;
+    String filePath1;
     /**
      * Some text here.
      */
     @CommandLine.Parameters(index = "1",
             description = "Path to the second file")
-    private String filePath2;
+    String filePath2;
     /**
      * Some text here.
      */

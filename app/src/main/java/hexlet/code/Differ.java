@@ -1,14 +1,9 @@
 package hexlet.code;
 
-import java.io.IOException;
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Comparator;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 
 final class Differ {
     private Differ() {
@@ -17,39 +12,10 @@ final class Differ {
     public static List<List<String>> generate(final String file1,
                                               final String file2,
                                               final String contentType) {
-        Map<String, Object> map1 = parseData(file1, contentType);
-        Map<String, Object> map2 = parseData(file2, contentType);
+        Map<String, Object> map1 = Parser.parseData(file1, contentType);
+        Map<String, Object> map2 = Parser.parseData(file2, contentType);
         return checkData(map1, map2);
     }
-
-    public static Map<String, Object> parseData(final String content,
-                                                final String contentType) {
-        //System.out.println("Received " + contentType + " content: " +
-        // content);
-
-        try {
-            ObjectMapper objectMapper;
-            if (contentType.equalsIgnoreCase("json")) {
-                objectMapper = new ObjectMapper();
-            } else if (contentType.equalsIgnoreCase("yml")) {
-                objectMapper = new YAMLMapper();
-            } else {
-                System.out.println("Unsupported content type: " + contentType);
-                return null;
-            }
-
-            Map<String, Object> map = objectMapper.readValue(content,
-                    new TypeReference<>() {
-                    });
-//            System.out.println(contentType.toUpperCase() + " parsed successfully.");
-            return map;
-        } catch (IOException e) {
-            System.out.println("Error parsing " + contentType + ": " + e.getMessage());
-            e.printStackTrace();
-            return null;
-        }
-    }
-
 
     public static List<String> lineAdd(final String val1, final String val2,
                                        final Object val3) {

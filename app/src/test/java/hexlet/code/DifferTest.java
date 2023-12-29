@@ -14,7 +14,7 @@ import java.util.Arrays;
 
 import static hexlet.code.Differ.lineAdd;
 import static hexlet.code.Differ.checkData;
-import static hexlet.code.Differ.parseData;
+import static hexlet.code.Parser.parseData;
 import static hexlet.code.Differ.generate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,31 +22,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DifferTest {
 
-    @Test
-    void testParseJsonData() throws Exception {
-        String filePath = "src/test/resources/file1.json";
-        String content = new String(Files.readAllBytes(Paths.get(filePath)));
-
-        Map<String, Object> result = parseData(content, "json");
-
-        assertEquals("hexlet.io", result.get("host"));
-        assertEquals(50, result.get("timeout"));
-        assertEquals("123.234.53.22", result.get("proxy"));
-        assertEquals(false, result.get("follow"));
-    }
-
-    @Test
-    void testParseYmlData() throws Exception {
-        String filePath = "src/test/resources/file1.yml";
-        String content = new String(Files.readAllBytes(Paths.get(filePath)));
-
-        Map<String, Object> result = parseData(content, "yml");
-
-        assertEquals("hexlet.io", result.get("host"));
-        assertEquals(50, result.get("timeout"));
-        assertEquals("123.234.53.22", result.get("proxy"));
-        assertEquals(false, result.get("follow"));
-    }
 
 
     @Test
