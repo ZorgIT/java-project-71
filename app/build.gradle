@@ -39,8 +39,19 @@ test {
 
 }
 
+
 jacocoTestReport {
-    dependsOn test // tests are required to run before generating the report
+//    dependsOn test // tests are required to run before generating the report
+    reports {
+        xml.required = true // Enable XML report
+        html.required = true // Enable HTML report (optional)
+    }
+    // Optionally, specify the report paths if needed
+    reports {
+        xml.destination file("build/reports/jacoco/xml/jacocoTestReport.xml") //
+        // XML report output path
+        html.destination file("build/reports/jacoco/html") // HTML report output path (optional)
+    }
 }
 
 testlogger {
