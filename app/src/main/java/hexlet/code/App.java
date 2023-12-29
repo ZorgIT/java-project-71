@@ -7,6 +7,7 @@ import picocli.CommandLine.Option;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 
 
 @Command(name = "gendiff", mixinStandardHelpOptions = true,
@@ -51,7 +52,7 @@ public final class App implements Runnable {
         try {
             String file1 = readFile(filePath1);
             String file2 = readFile(filePath2);
-            Differ.generate(file1, file2);
+            showDiff(Differ.generate(file1, file2));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -61,8 +62,16 @@ public final class App implements Runnable {
         return Files.readString(Paths.get(filePath));
     }
 
+    private void showDiff(List<List<String>> differnce) {
+        System.out.println("\n{");
+        for (List<String> line : differnce) {
+            System.out.printf("  %s %s: %s \n", line.get(0), line.get(1),
+                    line.get(2));
+        }
+        System.out.println("}");
+    }
+
     /**
-     *
      * @param args
      */
     public static void main(final String[] args) {
