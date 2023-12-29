@@ -23,7 +23,7 @@ test:
 	./gradlew jacocoTestReport
 
 lint:
-	./gradlew chechstyleMain
+	./gradlew checkstyleMain
 
 check-deps:
 	./gradlew dependencyUpdates -Drevision=release
