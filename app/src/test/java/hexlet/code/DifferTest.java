@@ -11,8 +11,11 @@ import java.util.List;
 import java.util.HashMap;
 import java.util.Arrays;
 
-import static hexlet.code.Differ.getData;
+import static hexlet.code.Differ.getJsonData;
+import static hexlet.code.Differ.getYmlData;
 import static hexlet.code.Differ.lineAdd;
+import static hexlet.code.Differ.checkData;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -23,7 +26,7 @@ public class DifferTest {
         String filePath = "src/test/resources/file1.json";
         String content = new String(Files.readAllBytes(Paths.get(filePath)));
 
-        Map<String, Object> result = getData(content);
+        Map<String, Object> result = getJsonData(content);
 
         assertEquals("hexlet.io", result.get("host"));
         assertEquals(50, result.get("timeout"));
@@ -54,7 +57,7 @@ public class DifferTest {
         newMap.put("key2", "newvalue2");
         newMap.put("key3", "value3");
 
-        List<List<String>> result = Differ.checkData(oldMap, newMap);
+        List<List<String>> result = checkData(oldMap, newMap);
 
         List<List<String>> expected = new ArrayList<>();
         expected.add(Arrays.asList(" ", "key1", "value1"));
@@ -70,5 +73,42 @@ public class DifferTest {
 
             assertEquals(expectedLine, resultLine);
         }
+
+
+//        Map<String, Object> oldMap1 = new HashMap<>();
+//        oldMap.put("key1", "value1");
+//        oldMap.put("key2", "value2");
+//
+//        Map<String, Object> newMap1 = new HashMap<>();
+//        newMap.put("key1", "value1");
+//
+//        List<List<String>> result1 = checkData(oldMap1, newMap1);
+//
+//        List<List<String>> expected1 = Arrays.asList(
+//                Arrays.asList("-", "key2", "value2")
+//        );
+//        assertEquals(expected1, result1);
+
     }
+
+    @Test
+    void testYamlData() throws Exception {
+        String filePath = "src/test/resources/file1.yml";
+        String content = new String(Files.readAllBytes(Paths.get(filePath)));
+        Map<String, Object> result1 = getYmlData(content);
+
+        assertEquals("hexlet.io", result1.get("host"));
+        assertEquals(50, result1.get("timeout"));
+        assertEquals("123.234.53.22", result1.get("proxy"));
+        assertEquals(false, result1.get("follow"));
+
+        String filePath2 = "src/test/resources/file2.yml";
+        String content2 = new String(Files.readAllBytes(Paths.get(filePath2)));
+        Map<String, Object> result2 = getYmlData(content2);
+
+        assertEquals(20, result2.get("timeout"));
+        assertEquals(true, result2.get("verbose"));
+        assertEquals("hexlet.io", result2.get("host"));
+    }
+
 }
