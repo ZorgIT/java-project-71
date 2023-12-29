@@ -2,7 +2,7 @@
 .PHONY: build setup clean install run run-dist test lint check-deps
 
 setup:
-	./gradlew wrapper --gradle-version 8.4
+	./gradlew wrapper --gradle-version 8.3
 
 clean:
 	./gradlew clean
