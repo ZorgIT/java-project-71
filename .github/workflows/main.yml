@@ -7,28 +7,26 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
-
-      - name: Setup Java
-        uses: actions/setup-java@v3
-        with:
-          java-version: '20' #
-          distribution: 'temurin'
-
-      - name: Set up working directory
-        working-directory: $GITHUB_WORKSPACE/app
-
-      - name: Gradle build
-        run: |
-          ./gradlew wrapper --gradle-version 8.3
-          ./gradlew clean build --stacktrace
       
-      - name: Run Make commands
+      - uses: actions/setup-java@v3
+        with:
+          java-version: '20'
+          distribution: 'temurin'
+      - uses: gradle/gradle-build-action@v2
+        with:
+          gradle-version: 8.4
+      
+      - name: Set up working directory and run Make commands
         run: |
+          cd $GITHUB_WORKSPACE/app
+          chmod +x ./gradlew  # Добавляем разрешения на выполнение
           make setup
           make clean
           make build
           make install
           lint build
+        
+
+
