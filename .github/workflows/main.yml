@@ -18,7 +18,8 @@ jobs:
           distribution: 'temurin'
 
       - name: Set up working directory
-        run: cd $GITHUB_WORKSPACE/app && pwd && ls -la
+        run: cd $GITHUB_WORKSPACE/app
+        working-directory: $GITHUB_WORKSPACE/app
 
       - name: Gradle build
         run: |
