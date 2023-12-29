@@ -26,7 +26,5 @@ jobs:
           make clean
           make build
           make install
-          lint build
-        
-
-
+          make lint
+          make build
