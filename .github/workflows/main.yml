@@ -20,6 +20,18 @@ jobs:
       - name: Install Make
         run: sudo apt-get update && sudo apt-get install -y make
 
+      - name: Setup with Make
+        run: make setup
+        
+      - name: Clean with Make
+        run: make clean
+      
       - name: Build with Make
-        run: make build
-    
+        run: make build        
+        
+      - name: Install with Make
+        run: make install      
+        
+      - name: Lint with Make
+        run: lint build  
+        
