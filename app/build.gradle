@@ -62,3 +62,4 @@ testlogger {
     showFailedStandardStreams true
     logLevel 'lifecycle'
 }
+

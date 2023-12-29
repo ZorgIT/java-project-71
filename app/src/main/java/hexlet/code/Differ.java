@@ -32,7 +32,9 @@ final class Differ {
 
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            Map<String, Object> map = objectMapper.readValue(content, new TypeReference<Map<String, Object>>() {});
+            Map<String, Object> map = objectMapper.readValue(content,
+                    new TypeReference<Map<String, Object>>() {
+                    });
             System.out.println("JSON parsed successfully.");
             return map;
         } catch (IOException e) {
@@ -43,12 +45,12 @@ final class Differ {
     }
 
 
-    public static List lineAdd(final String val1, final String val2,
+    public static List<String> lineAdd(final String val1, final String val2,
                                final Object val3) {
-        List<Object> line = new ArrayList<>();
+        List<String> line = new ArrayList<>();
         line.add(val1);
         line.add(val2);
-        line.add(val3);
+        line.add(val3.toString());
         return line;
     }
 
@@ -84,7 +86,7 @@ final class Differ {
             Object oldValue = oldMap.get(curKey);
             //2. проверяем, есть ли такой ключ в файле 2
             if (oldValue == null) {
-                //ключ отсуствовал в изначальном
+                //ключ отсутствовал в изначальном
                 lineStatus.add(lineAdd("+", curKey, entryNew.getValue()));
             }
         }
