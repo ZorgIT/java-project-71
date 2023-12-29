@@ -2,13 +2,13 @@ package hexlet.code;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Map;
 
 import static hexlet.code.Parser.parseData;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class ParserTest {
 
@@ -58,5 +58,4 @@ class ParserTest {
 
         assertNull(result);
     }
-
 }

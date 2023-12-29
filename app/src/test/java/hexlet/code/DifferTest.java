@@ -14,7 +14,6 @@ import java.util.Arrays;
 
 import static hexlet.code.Differ.lineAdd;
 import static hexlet.code.Differ.checkData;
-import static hexlet.code.Parser.parseData;
 import static hexlet.code.Differ.generate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
