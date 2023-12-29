@@ -8,7 +8,7 @@ clean:
 	./gradlew clean
 
 build:
-	./gradlew clean build
+	./gradlew clean build --stacktrace
 
 install:
 	./gradlew clean install
