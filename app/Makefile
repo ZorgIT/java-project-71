@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := build-run
-.PHONY: build setup clean install run run-dist test lint check-deps
+.PHONY: build setup clean install run run-dist test lint check-deps report
 
 setup:
 	./gradlew wrapper --gradle-version 8.3
@@ -27,6 +27,9 @@ lint:
 
 check-deps:
 	./gradlew dependencyUpdates -Drevision=release
+
+report:
+	./gradlew jacocoTestReport
 
 
 build-run: build run
