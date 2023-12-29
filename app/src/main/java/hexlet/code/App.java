@@ -52,7 +52,7 @@ public final class App implements Runnable {
         try {
             String file1 = readFile(filePath1);
             String file2 = readFile(filePath2);
-            String[] contentType = file1.split(".");
+            String[] contentType = filePath1.split("\\.");
             showDiff(Differ.generate(file1, file2, contentType[1]));
         } catch (Exception e) {
             throw new RuntimeException(e);

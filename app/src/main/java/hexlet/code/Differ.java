@@ -24,7 +24,8 @@ final class Differ {
 
     public static Map<String, Object> parseData(final String content,
                                                 final String contentType) {
-        System.out.println("Received " + contentType + " content: " + content);
+        //System.out.println("Received " + contentType + " content: " +
+        // content);
 
         try {
             ObjectMapper objectMapper;
@@ -40,7 +41,7 @@ final class Differ {
             Map<String, Object> map = objectMapper.readValue(content,
                     new TypeReference<>() {
                     });
-            System.out.println(contentType.toUpperCase() + " parsed successfully.");
+//            System.out.println(contentType.toUpperCase() + " parsed successfully.");
             return map;
         } catch (IOException e) {
             System.out.println("Error parsing " + contentType + ": " + e.getMessage());
