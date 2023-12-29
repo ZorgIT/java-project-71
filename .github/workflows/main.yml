@@ -10,6 +10,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      
+      - name: Set up working directory
+        run: cd app
+        working-directory: ./app
+      
       - uses: actions/setup-java@v3
         with:
           java-version: '20'
