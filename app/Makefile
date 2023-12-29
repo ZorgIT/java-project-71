@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := build-run
-.PHONY: build
+.PHONY: build setup clean install run run-dist test lint check-deps
 
 setup:
 	./gradlew wrapper --gradle-version 8.4
