@@ -10,22 +10,22 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      
-      - name: Set up working directory and run Make commands
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '20' #
+          distribution: 'temurin'
+
+      - name: Gradle build
         run: |
-          cd $GITHUB_WORKSPACE/app
-          chmod +x ./gradlew  # Добавляем разрешения на выполнение
+          ./gradlew wrapper --gradle-version 8.3
+          ./gradlew clean build --stacktrace
+      
+      - name: Run Make commands
+        run: |
           make setup
           make clean
           make build
           make install
           lint build
-        
-      - uses: actions/setup-java@v3
-        with:
-          java-version: '20'
-          distribution: 'temurin'
-      
-      - uses: gradle/gradle-build-action@v2
-        with:
-          gradle-version: 8.3
