@@ -15,12 +15,10 @@ final class Differ {
     }
 
     public static List<List<String>> generate(final String json1,
-                                              final String json2)
-            throws Exception {
+                                              final String json2) {
         Map<String, Object> map1 = getJsonData(json1);
         Map<String, Object> map2 = getJsonData(json2);
-        List<List<String>> result = checkData(map1, map2);
-        return result;
+        return checkData(map1, map2);
     }
 
     public static Map<String, Object> getJsonData(final String content) {
@@ -29,7 +27,7 @@ final class Differ {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             Map<String, Object> map = objectMapper.readValue(content,
-                    new TypeReference<Map<String, Object>>() {
+                    new TypeReference<>() {
                     });
             System.out.println("JSON parsed successfully.");
             return map;
@@ -46,7 +44,7 @@ final class Differ {
         try {
             ObjectMapper objectMapper = new YAMLMapper();
             Map<String, Object> map = objectMapper.readValue(content,
-                    new TypeReference<Map<String, Object>>() {
+                    new TypeReference<>() {
                     });
             System.out.println("YAML parsed successfully.");
             return map;
