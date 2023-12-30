@@ -1,21 +1,21 @@
 package hexlet.code;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 final class Parser {
     private Parser() {
     }
 
-    public static Map<String, Object> parseData(final String content,
+    public static Map<String, String> parseData(final String content,
                                                 final String contentType) {
-        //System.out.println("Received " + contentType + " content: " +
-        // content);
-
         try {
             ObjectMapper objectMapper;
             if (contentType.equalsIgnoreCase("json")) {
@@ -26,16 +26,18 @@ final class Parser {
                 System.out.println("Unsupported content type: " + contentType);
                 return null;
             }
-
-            Map<String, Object> map = objectMapper.readValue(content,
-                    new TypeReference<>() {
-                    });
-//            System.out.println(contentType.toUpperCase() + " parsed successfully.");
+            JsonNode jsonNode = objectMapper.readTree(content);
+            Map<String, String> map = new HashMap<>();
+            Iterator<Map.Entry<String,JsonNode>> line = jsonNode.fields();
+            while (line.hasNext()){
+                Map.Entry<String, JsonNode> next = line.next();
+                map.put(next.getKey(),next.getValue().toString());
+            }
             return map;
         } catch (IOException e) {
             System.out.println("Error parsing " + contentType + ": " + e.getMessage());
-            //e.printStackTrace();
             return null;
         }
+
     }
 }

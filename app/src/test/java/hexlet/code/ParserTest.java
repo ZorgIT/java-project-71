@@ -17,7 +17,7 @@ class ParserTest {
         String filePath = "src/test/resources/file1.json";
         String content = new String(Files.readAllBytes(Paths.get(filePath)));
 
-        Map<String, Object> result = parseData(content, "json");
+        Map<String, String> result = parseData(content, "json");
 
         assertEquals("hexlet.io", result.get("host"));
         assertEquals(50, result.get("timeout"));
@@ -30,7 +30,7 @@ class ParserTest {
         String filePath = "src/test/resources/file1.yml";
         String content = new String(Files.readAllBytes(Paths.get(filePath)));
 
-        Map<String, Object> result = parseData(content, "yml");
+        Map<String, String> result = parseData(content, "yml");
 
         assertEquals("hexlet.io", result.get("host"));
         assertEquals(50, result.get("timeout"));
@@ -44,7 +44,7 @@ class ParserTest {
         String content = "[1, 2, 3]";
         String contentType = "xml";
 
-        Map<String, Object> result = Parser.parseData(content, contentType);
+        Map<String, String> result = Parser.parseData(content, contentType);
 
         assertNull(result);
     }
@@ -54,7 +54,7 @@ class ParserTest {
         String content = "invalid content";
         String contentType = "json";
 
-        Map<String, Object> result = Parser.parseData(content, contentType);
+        Map<String, String> result = Parser.parseData(content, contentType);
 
         assertNull(result);
     }

@@ -64,12 +64,17 @@ public final class App implements Runnable {
     }
 
     private void showDiff(List<List<String>> difference) {
-        System.out.println("\n{");
-        for (List<String> line : difference) {
-            System.out.printf("  %s %s: %s \n", line.get(0), line.get(1),
-                    line.get(2));
+        if (this.format.equals("stylish")) {
+            System.out.println("\n{");
+            for (List<String> line : difference) {
+                System.out.printf("  %s %s: %s \n", line.get(0), line.get(1),
+                        line.get(2));
+            }
+            System.out.println("}");
+        } else if (this.format.equals("plane")){
+            System.out.printf("PLANE OUTPUT NOT IMPLEMENTED");
         }
-        System.out.println("}");
+
     }
 
     /**

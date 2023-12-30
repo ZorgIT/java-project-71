@@ -37,11 +37,11 @@ public class DifferTest {
 
     @Test
     void testCheckData() {
-        Map<String, Object> oldMap = new HashMap<>();
+        Map<String, String> oldMap = new HashMap<>();
         oldMap.put("key1", "value1");
         oldMap.put("key2", "value2");
 
-        Map<String, Object> newMap = new HashMap<>();
+        Map<String, String> newMap = new HashMap<>();
         newMap.put("key1", "value1");
         newMap.put("key2", "newvalue2");
         newMap.put("key3", "value3");
