@@ -71,7 +71,7 @@ public final class App implements Runnable {
                         line.get(2));
             }
             System.out.println("}");
-        } else if (this.format.equals("plane")){
+        } else if (this.format.equals("plane")) {
             System.out.printf("PLANE OUTPUT NOT IMPLEMENTED");
         }
 

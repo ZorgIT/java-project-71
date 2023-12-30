@@ -1,6 +1,5 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
@@ -28,10 +27,10 @@ final class Parser {
             }
             JsonNode jsonNode = objectMapper.readTree(content);
             Map<String, String> map = new HashMap<>();
-            Iterator<Map.Entry<String,JsonNode>> line = jsonNode.fields();
-            while (line.hasNext()){
+            Iterator<Map.Entry<String, JsonNode>> line = jsonNode.fields();
+            while (line.hasNext()) {
                 Map.Entry<String, JsonNode> next = line.next();
-                map.put(next.getKey(),next.getValue().toString());
+                map.put(next.getKey(), next.getValue().toString().replace("\"", ""));
             }
             return map;
         } catch (IOException e) {

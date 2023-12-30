@@ -20,9 +20,9 @@ class ParserTest {
         Map<String, String> result = parseData(content, "json");
 
         assertEquals("hexlet.io", result.get("host"));
-        assertEquals(50, result.get("timeout"));
+        assertEquals("50", result.get("timeout"));
         assertEquals("123.234.53.22", result.get("proxy"));
-        assertEquals(false, result.get("follow"));
+        assertEquals("false", result.get("follow"));
     }
 
     @Test
@@ -33,9 +33,9 @@ class ParserTest {
         Map<String, String> result = parseData(content, "yml");
 
         assertEquals("hexlet.io", result.get("host"));
-        assertEquals(50, result.get("timeout"));
+        assertEquals("50", result.get("timeout"));
         assertEquals("123.234.53.22", result.get("proxy"));
-        assertEquals(false, result.get("follow"));
+        assertEquals("false", result.get("follow"));
     }
 
 
