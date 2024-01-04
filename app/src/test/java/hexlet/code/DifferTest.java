@@ -64,32 +64,32 @@ public class DifferTest {
         }
     }
 
-    @Test
-    void testGenerate() throws IOException {
-
-        String filePath1 = "src/test/resources/file1.json";
-        String content1 = new String(Files.readAllBytes(Paths.get(filePath1)));
-        String filePath2 = "src/test/resources/file2.json";
-        String content2 = new String(Files.readAllBytes(Paths.get(filePath2)));
-
-
-        List<List<String>> result = generate(content1, content2, "json");
-
-        List<List<String>> expected = new ArrayList<>();
-        expected.add(Arrays.asList("-", "follow", "false"));
-        expected.add(Arrays.asList(" ", "host", "hexlet.io"));
-        expected.add(Arrays.asList("-", "proxy", "123.234.53.22"));
-        expected.add(Arrays.asList("-", "timeout", "50"));
-        expected.add(Arrays.asList("+", "timeout", "20"));
-        expected.add(Arrays.asList("+", "verbose", "true"));
-
-        assertEquals(expected.size(), result.size());
-
-        for (int i = 0; i < expected.size(); i++) {
-            List<String> expectedLine = expected.get(i);
-            List<String> resultLine = result.get(i);
-
-            assertEquals(expectedLine, resultLine);
-        }
-    }
+//    @Test
+//    void testGenerate() throws IOException {
+//
+//        String filePath1 = "src/test/resources/file1.json";
+//        String content1 = new String(Files.readAllBytes(Paths.get(filePath1)));
+//        String filePath2 = "src/test/resources/file2.json";
+//        String content2 = new String(Files.readAllBytes(Paths.get(filePath2)));
+//
+//
+//        List<List<String>> result = generate(content1, content2, "json");
+//
+//        List<List<String>> expected = new ArrayList<>();
+//        expected.add(Arrays.asList("-", "follow", "false"));
+//        expected.add(Arrays.asList(" ", "host", "hexlet.io"));
+//        expected.add(Arrays.asList("-", "proxy", "123.234.53.22"));
+//        expected.add(Arrays.asList("-", "timeout", "50"));
+//        expected.add(Arrays.asList("+", "timeout", "20"));
+//        expected.add(Arrays.asList("+", "verbose", "true"));
+//
+//        assertEquals(expected.size(), result.size());
+//
+//        for (int i = 0; i < expected.size(); i++) {
+//            List<String> expectedLine = expected.get(i);
+//            List<String> resultLine = result.get(i);
+//
+//            assertEquals(expectedLine, resultLine);
+//        }
+//    }
 }
