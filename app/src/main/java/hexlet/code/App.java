@@ -82,15 +82,11 @@ public final class App implements Runnable {
                 if (lineStatus.equals(" ")) {
                     continue;
                 }
-                if (!lineStatus.equals(" ")) {
-                    if (lineStatus.equals("-")) {
-                        sb.append("Property " + "\'" + line1.get(1) + "\' ");
-                        List<String> line2 = new ArrayList<>();
-                        if (iterator.hasNext()) {
-                            line2 = iterator.next();
-                        } else {
-                            sb.append("was removed");
-                        }
+                if (lineStatus.equals("-")) {
+                    sb.append("Property " + "\'" + line1.get(1) + "\' ");
+                    List<String> line2 = new ArrayList<>();
+                    if (iterator.hasNext()) {
+                        line2 = iterator.next();
                         if (line1.get(1).equals(line2.get(1))) {
                             sb.append("was updated. From ");
                             if (line1.get(2).charAt(0) == '['
@@ -106,20 +102,31 @@ public final class App implements Runnable {
                                 sb.append("to " + line2.get(2) + " ");
                             }
                         } else {
-                            sb.append("was removed");
+                            sb.append("was removed" + "\n");
+                            sb.append("Property " + "\'" + line2.get(1) + "' " +
+                                    "was"
+                                    + " added with value: ");
+                            if (line2.get(2).charAt(0) == '['
+                                    || line2.get(2).charAt(0) == '{') {
+                                sb.append("[complex value] ");
+                            } else {
+                                sb.append(line2.get(2) + " ");
+                            }
                         }
-
                     } else {
-                        sb.append("Property " + "\'" + line1.get(1) + "\' was"
-                                + " added with value: ");
-                        if (line1.get(2).charAt(0) == '['
-                                || line1.get(2).charAt(0) == '{') {
-                            sb.append("[complex value] ");
-                        } else {
-                            sb.append(line1.get(2) + " ");
-                        }
-
+                        sb.append("was removed");
                     }
+
+                } else {
+                    sb.append("Property " + "\'" + line1.get(1) + "\' was"
+                            + " added with value: ");
+                    if (line1.get(2).charAt(0) == '['
+                            || line1.get(2).charAt(0) == '{') {
+                        sb.append("[complex value] ");
+                    } else {
+                        sb.append(line1.get(2) + " ");
+                    }
+
                 }
                 sb.append("\n");
             }
