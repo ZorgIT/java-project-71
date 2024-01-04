@@ -3,7 +3,12 @@ package hexlet.code;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+
+import java.util.Map;
+import java.util.List;
+import java.util.Comparator;
+import java.util.Iterator;
 
 import static hexlet.code.Parser.parseData;
 
@@ -12,15 +17,15 @@ final class Differ {
     }
 
     public static void generate(final String filePath1,
-                                              final String filePath2,
-                                              final String format) {
+                                final String filePath2,
+                                final String format) {
         String[] contentType = filePath1.split("\\.");
         try {
             String file1 = readFile(filePath1);
             String file2 = readFile(filePath2);
             Map<String, String> map1 = parseData(file1, contentType[1]);
             Map<String, String> map2 = parseData(file2, contentType[1]);
-            showDiff(checkData(map1, map2),format);
+            showDiff(checkData(map1, map2), format);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -110,9 +115,8 @@ final class Differ {
                             }
                         } else {
                             sb.append("was removed" + "\n");
-                            sb.append("Property " + "\'" + line2.get(1) + "' " +
-                                    "was"
-                                    + " added with value: ");
+                            sb.append("Property " + "\'" + line2.get(1) + "' "
+                                    + "was added with value: ");
                             if (line2.get(2).charAt(0) == '['
                                     || line2.get(2).charAt(0) == '{') {
                                 sb.append("[complex value] ");

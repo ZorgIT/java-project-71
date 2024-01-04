@@ -3,9 +3,6 @@ package hexlet.code;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,13 +11,11 @@ import java.util.Arrays;
 
 import static hexlet.code.Differ.lineAdd;
 import static hexlet.code.Differ.checkData;
-import static hexlet.code.Differ.generate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class DifferTest {
-
 
 
     @Test
