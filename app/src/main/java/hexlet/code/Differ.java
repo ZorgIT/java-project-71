@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 import java.util.Comparator;
-import java.util.Iterator;
 
 import static hexlet.code.Parser.parseData;
 
@@ -25,7 +24,7 @@ final class Differ {
             String file2 = readFile(filePath2);
             Map<String, String> map1 = parseData(file1, contentType[1]);
             Map<String, String> map2 = parseData(file2, contentType[1]);
-            showDiff(checkData(map1, map2), format);
+            Formatter.showDiff(checkData(map1, map2), format);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -77,73 +76,6 @@ final class Differ {
         return Files.readString(Paths.get(filePath));
     }
 
-    private static void showDiff(List<List<String>> difference, String format) {
-        if (format.equals("stylish")) {
-            System.out.println("\n{");
-            for (List<String> line : difference) {
-                System.out.printf("  %s %s: %s \n", line.get(0), line.get(1),
-                        line.get(2));
-            }
-            System.out.println("}");
-        } else if (format.equals("plain")) {
-            StringBuilder sb = new StringBuilder();
-            Iterator<List<String>> iterator = difference.iterator();
-            while (iterator.hasNext()) {
-                List<String> line1 = iterator.next();
-                String lineStatus = line1.get(0);
-                if (lineStatus.equals(" ")) {
-                    continue;
-                }
-                if (lineStatus.equals("-")) {
-                    sb.append("Property " + "\'" + line1.get(1) + "\' ");
-                    List<String> line2 = new ArrayList<>();
-                    if (iterator.hasNext()) {
-                        line2 = iterator.next();
-                        if (line1.get(1).equals(line2.get(1))) {
-                            sb.append("was updated. From ");
-                            if (line1.get(2).charAt(0) == '['
-                                    || line1.get(2).charAt(0) == '{') {
-                                sb.append("[complex value] ");
-                            } else {
-                                sb.append(line1.get(2) + " ");
-                            }
-                            if (line2.get(2).charAt(0) == '['
-                                    || line1.get(2).charAt(0) == '{') {
-                                sb.append("to [complex value]");
-                            } else {
-                                sb.append("to " + line2.get(2) + " ");
-                            }
-                        } else {
-                            sb.append("was removed" + "\n");
-                            sb.append("Property " + "\'" + line2.get(1) + "' "
-                                    + "was added with value: ");
-                            if (line2.get(2).charAt(0) == '['
-                                    || line2.get(2).charAt(0) == '{') {
-                                sb.append("[complex value] ");
-                            } else {
-                                sb.append(line2.get(2) + " ");
-                            }
-                        }
-                    } else {
-                        sb.append("was removed");
-                    }
-
-                } else {
-                    sb.append("Property " + "\'" + line1.get(1) + "\' was"
-                            + " added with value: ");
-                    if (line1.get(2).charAt(0) == '['
-                            || line1.get(2).charAt(0) == '{') {
-                        sb.append("[complex value] ");
-                    } else {
-                        sb.append(line1.get(2) + " ");
-                    }
-
-                }
-                sb.append("\n");
-            }
-            System.out.printf(sb.toString());
-        }
-    }
 }
 
 
