@@ -11,7 +11,7 @@ import java.util.Comparator;
 
 import static hexlet.code.Parser.parseData;
 
-final class Differ {
+public final class Differ {
     private Differ() {
     }
 
