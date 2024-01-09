@@ -49,7 +49,7 @@ public class Stylish {
     }
 
     public static String checkValueToComplex(String line) {
-        if (line.equals("null") || line.equals("true") || line.equals("false")||StringUtils.isNumeric(line)) {
+        if (line.equals("null") || line.equals("true") || line.equals("false") || StringUtils.isNumeric(line)) {
             return line;
         }
 
