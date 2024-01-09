@@ -35,7 +35,7 @@ public final class Differ {
 
     public static String generate(final String filePath1,
                                   final String filePath2) {
-        return generate(filePath1, filePath2, "plain");
+        return generate(filePath1, filePath2, "stylish");
     }
 
     public static List<String> lineAdd(final String val1, final String val2,
