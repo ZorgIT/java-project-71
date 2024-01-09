@@ -12,12 +12,12 @@ public class Formatter {
 
     static String convertToFormat(List<List<String>> difference, String format) {
         switch (format.toLowerCase()) {
-            case "stylish":
-                return formatToStylish(difference);
+            case "plain":
+                return formatToPlain(difference);
             case "json":
                 return formatToJson(difference);
             default:
-                return formatToPlain(difference);
+                return formatToStylish(difference);
         }
 
     }
