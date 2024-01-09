@@ -16,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DifferTest {
 
-
     @Test
     void testLineAdd() {
         List<Object> line = new ArrayList<>();
