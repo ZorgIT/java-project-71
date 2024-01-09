@@ -8,13 +8,13 @@ public class Plain {
         List<String> plainFormat = new ArrayList<>();
         plainFormat.add("{");
         for (List<String> line : difference) {
-            plainFormat.add(" " + line.get(0) + " " + line.get(1) + ": " + line.get(2));
+            plainFormat.add("\t" + line.get(0) + " " + line.get(1) + ": " + line.get(2));
         }
-        plainFormat.add("}");
         String plainString = "";
-        for (String line: plainFormat) {
+        for (String line : plainFormat) {
             plainString += line + "\n";
         }
+        plainString += "}";
         return plainString;
     }
 }

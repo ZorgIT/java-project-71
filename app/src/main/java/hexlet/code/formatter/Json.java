@@ -14,14 +14,15 @@ public class Json {
             List<String> line1 = iterator.next();
             String lineStatus = line1.get(0);
             sb.append("\t" + lineStatus + " " + line1.get(1)
-                    + ": " + line1.get(2));
+                    + ": " + line1.get(2).toString().replace(",", ", "));
             jsonFormat.add(sb.toString());
         }
-        jsonFormat.add("}");
+
         String jsonString = "";
-        for (String line: jsonFormat) {
+        for (String line : jsonFormat) {
             jsonString += line + "\n";
         }
+        jsonString += "}";
         return jsonString;
     }
 }
