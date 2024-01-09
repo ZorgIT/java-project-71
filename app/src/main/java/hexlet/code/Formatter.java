@@ -10,7 +10,7 @@ import static hexlet.code.formatter.Stylish.formatToStylish;
 
 public class Formatter {
 
-    public String convertToFormat (List<List<String>> difference, String format){
+    public String convertToFormat(List<List<String>> difference, String format) {
         switch (format.toLowerCase()) {
             case "plain":
                 return formatToStylish(difference);
