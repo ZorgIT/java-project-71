@@ -27,7 +27,7 @@ public final class App implements Runnable {
 
     @Option(names = {"-f", "--format"}, description = "Output format "
             + "[default: stylish]")
-    public String format = "stylish";
+    protected static String format = "stylish";
     /**
      * Some text here.
      */
