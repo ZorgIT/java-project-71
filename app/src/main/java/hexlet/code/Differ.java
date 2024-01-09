@@ -15,19 +15,27 @@ public final class Differ {
     private Differ() {
     }
 
-    public static void generate(final String filePath1,
-                                final String filePath2,
-                                final String format) {
+    public static String generate(final String filePath1,
+                                  final String filePath2,
+                                  final String format) {
         String[] contentType = filePath1.split("\\.");
+        List<List<String>> difference;
         try {
             String file1 = readFile(filePath1);
             String file2 = readFile(filePath2);
             Map<String, String> map1 = parseData(file1, contentType[1]);
             Map<String, String> map2 = parseData(file2, contentType[1]);
-            Formatter.showDiff(checkData(map1, map2), format);
+            difference = checkData(map1, map2);
+            Formatter.showDiff(difference, format);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        return difference.toString();
+    }
+
+    public static String generate(final String filePath1,
+                                  final String filePath2) {
+        return generate(filePath1, filePath2, "stylish");
     }
 
     public static List<String> lineAdd(final String val1, final String val2,
