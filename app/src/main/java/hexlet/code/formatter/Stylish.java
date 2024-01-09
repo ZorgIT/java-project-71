@@ -40,7 +40,7 @@ public class Stylish {
             stylishFormat.add(sb.toString());
         }
         String stylishString = "";
-        for (String line: stylishFormat) {
+        for (String line : stylishFormat) {
             stylishString += line + "\n";
         }
         return stylishString;
