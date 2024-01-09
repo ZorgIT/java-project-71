@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Stylish {
-    public static List<String> formatToStylish(List<List<String>> difference) {
+    public static String formatToStylish(List<List<String>> difference) {
         List<String> stylishFormat = new ArrayList<>();
         Iterator<List<String>> iterator = difference.iterator();
 
@@ -39,7 +39,11 @@ public class Stylish {
             }
             stylishFormat.add(sb.toString());
         }
-        return stylishFormat;
+        String stylishString = "";
+        for (String line: stylishFormat) {
+            stylishString += line + "\n";
+        }
+        return stylishString;
     }
 
     public static String checkValueToComplex(String line) {
