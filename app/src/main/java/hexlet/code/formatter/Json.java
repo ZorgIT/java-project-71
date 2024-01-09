@@ -13,7 +13,7 @@ public class Json {
             StringBuilder sb = new StringBuilder();
             List<String> line1 = iterator.next();
             String lineStatus = line1.get(0);
-            sb.append(" " + lineStatus + " " + line1.get(1)
+            sb.append("  " + lineStatus + " " + line1.get(1)
                     + ": " + line1.get(2).toString().replace(",", ", "));
             jsonFormat.add(sb.toString());
         }

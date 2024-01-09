@@ -8,7 +8,7 @@ public class Plain {
         List<String> plainFormat = new ArrayList<>();
         plainFormat.add("{");
         for (List<String> line : difference) {
-            plainFormat.add(" " + line.get(0) + " " + line.get(1) + ": " + line.get(2).toString().replace(",", ", "));
+            plainFormat.add("  " + line.get(0) + " " + line.get(1) + ": " + line.get(2).toString().replace(",", ", "));
         }
         String plainString = "";
         for (String line : plainFormat) {
