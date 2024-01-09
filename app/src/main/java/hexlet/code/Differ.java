@@ -26,7 +26,7 @@ public final class Differ {
             Map<String, String> map1 = parseData(file1, contentType[1]);
             Map<String, String> map2 = parseData(file2, contentType[1]);
             difference = checkData(map1, map2);
-            Formatter.showDiff(difference, format);
+            // Formatter.showDiff(difference, format);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
