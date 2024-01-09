@@ -1,5 +1,7 @@
 package hexlet.code.formatter;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -47,7 +49,11 @@ public class Stylish {
     }
 
     public static String checkValueToComplex(String line) {
+        if (line.equals("null") || line.equals("true") || line.equals("false")||StringUtils.isNumeric(line)) {
+            return line;
+        }
+
         return (line.charAt(0) == '['
-                || line.charAt(0) == '{') ? "[complex value]" : (line);
+                || line.charAt(0) == '{') ? "[complex value]" : ("'" + (line) + "'");
     }
 }
