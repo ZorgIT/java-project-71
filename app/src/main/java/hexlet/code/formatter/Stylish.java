@@ -45,7 +45,7 @@ public class Stylish {
         for (String line : stylishFormat) {
             stylishString += line + "\n";
         }
-        return stylishString;
+        return stylishString.substring(0, stylishString.length());
     }
 
     public static String checkValueToComplex(String line) {
