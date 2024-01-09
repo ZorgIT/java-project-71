@@ -30,7 +30,7 @@ public final class Differ {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return difference.toString();
+        return Formatter.convertToFormat(difference, format);
     }
 
     public static String generate(final String filePath1,
