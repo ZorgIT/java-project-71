@@ -59,7 +59,7 @@ public class DifferTest {
     }
 
     @Test
-    void testGneeratePlain() {
+    void testGenerateStylish() {
         String expected = "{\n"
                 + "    chars1: [a, b, c]\n"
                 + "  - chars2: [d, e, f]\n"
@@ -86,13 +86,13 @@ public class DifferTest {
                 + "  + setting3: none\n"
                 + "}";
         String actual = generate("src/test/resources/file3.json",
-                "src/test/resources/file4.json", "plain");
+                "src/test/resources/file4.json", "Stylish");
         assertEquals(expected, actual);
     }
 
     @Test
-    void testGenerateStylish() {
-        App.format = "stylish";
+    void testGeneratePlain() {
+        App.format = "plain";
         String expected = "Property 'chars2' was updated. From [complex "
                 + "value] to false\n"
                 + "Property 'checked' was updated. From false to true\n"
@@ -111,7 +111,7 @@ public class DifferTest {
                 + "Property 'setting2' was updated. From 200 to 300\n"
                 + "Property 'setting3' was updated. From true to 'none'";
         String actual = generate("src/test/resources/file3.json",
-                "src/test/resources/file4.json", "stylish");
+                "src/test/resources/file4.json", "plain");
         assertEquals(expected, actual);
     }
 

@@ -25,13 +25,13 @@ public class Formatter {
     static void showDiff(List<List<String>> difference, String format) throws JsonProcessingException {
         switch (format.toLowerCase()) {
             case "plain":
-                System.out.println(formatToStylish(difference));
+                System.out.println(formatToPlain(difference));
                 break;
             case "json":
                 System.out.println(formatToJson(difference));
                 break;
             default:
-                System.out.println(formatToPlain(difference));
+                System.out.println(formatToStylish(difference));
         }
     }
 }

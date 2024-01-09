@@ -1,23 +1,59 @@
 package hexlet.code.formatter;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Plain {
     public static String formatToPlain(List<List<String>> difference) {
-        List<String> plainFormat = new ArrayList<>();
-        plainFormat.add("{");
-        for (List<String> line : difference) {
-            plainFormat.add("  " + line.get(0) + " " + line.get(1) + ": "
-                    + line.get(2).toString()
-                    .replace(",", ", ")
-                    .replace(":", "="));
+        List<String> stylishFormat = new ArrayList<>();
+        Iterator<List<String>> iterator = difference.iterator();
+
+        while (iterator.hasNext()) {
+            StringBuilder sb = new StringBuilder();
+            List<String> line1 = iterator.next();
+            String lineStatus = line1.get(0);
+            if (lineStatus.equals(" ")) {
+                continue;
+            }
+            if (lineStatus.equals("-")) {
+                sb.append("Property " + "\'" + line1.get(1) + "\' ");
+                List<String> line2;
+                if (iterator.hasNext()) {
+                    line2 = iterator.next();
+                    if (line1.get(1).equals(line2.get(1))) {
+                        sb.append("was updated. From " + checkValueToComplex(line1.get(2)));
+                        sb.append(" to " + checkValueToComplex(line2.get(2)));
+                    } else {
+                        sb.append("was removed" + "\n");
+                        sb.append("Property " + "\'" + line2.get(1) + "' "
+                                + "was added with value: " + checkValueToComplex(line2.get(2)));
+                    }
+
+                } else {
+                    sb.append("was removed");
+                }
+            } else {
+                sb.append("Property " + "\'" + line1.get(1) + "\' was"
+                        + " added with value: " + checkValueToComplex(line1.get(2)));
+            }
+            stylishFormat.add(sb.toString());
         }
-        String plainString = "";
-        for (String line : plainFormat) {
-            plainString += line + "\n";
+        String stylishString = "";
+        for (String line : stylishFormat) {
+            stylishString += line + "\n";
         }
-        plainString += "}";
-        return plainString;
+        return stylishString.substring(0, stylishString.length() - 1);
+    }
+
+    public static String checkValueToComplex(String line) {
+        if (line.equals("null") || line.equals("true") || line.equals("false") || StringUtils.isNumeric(line)) {
+            return line;
+        }
+
+        return (line.charAt(0) == '['
+                || line.charAt(0) == '{') ? "[complex value]" : ("'" + (line) + "'");
     }
 }
