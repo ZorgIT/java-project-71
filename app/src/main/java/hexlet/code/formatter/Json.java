@@ -14,7 +14,9 @@ public class Json {
             List<String> line1 = iterator.next();
             String lineStatus = line1.get(0);
             sb.append("  " + lineStatus + " " + line1.get(1)
-                    + ": " + line1.get(2).toString().replace(",", ", "));
+                    + ": " + line1.get(2).toString()
+                    .replace(",", ", ")
+                    .replace(":", "="));
             jsonFormat.add(sb.toString());
         }
 
