@@ -93,7 +93,7 @@ public class DifferTest {
 
     @Test
     void testGeneratePlain() throws JsonProcessingException {
-        App.format = "plain";
+        App.setFormat("plain");
         String expected = "Property 'chars2' was updated. From [complex "
                 + "value] to false\n"
                 + "Property 'checked' was updated. From false to true\n"

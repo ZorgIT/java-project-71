@@ -49,7 +49,7 @@ public final class Differ {
 
     public static String generate(final String filePath1,
                                   final String filePath2) {
-        return generate(filePath1, filePath2, App.format);
+        return generate(filePath1, filePath2, App.getFormat());
     }
 
     public static List<String> lineAdd(final String val1, final String val2,

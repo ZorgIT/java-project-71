@@ -14,8 +14,8 @@ class AppTest {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         App app = new App();
-        app.filePath1 = "src/test/resources/file1.json";
-        app.filePath2 = "src/test/resources/file2.json";
+        app.setFilePath1("src/test/resources/file1.json");
+        app.setFilePath2("src/test/resources/file2.json");
 
         app.run();
         String output = outContent.toString().trim();

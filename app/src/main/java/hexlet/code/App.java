@@ -14,20 +14,21 @@ public final class App implements Runnable {
      */
     @CommandLine.Parameters(index = "0",
             description = "Path to the first file")
-    public static String filePath1;
+    private static String filePath1;
+
     /**
      * Some text here.
      */
     @CommandLine.Parameters(index = "1",
             description = "Path to the second file")
-    public static String filePath2;
+    private static String filePath2;
     /**
      * Some text here.
      */
 
     @Option(names = {"-f", "--format"}, description = "Output format "
             + "[default: stylish]")
-    public static  String format = "stylish";
+    private static  String format = "stylish";
     /**
      * Some text here.
      */
@@ -44,6 +45,29 @@ public final class App implements Runnable {
     @Override
     public void run() {
         Differ.generate(filePath1, filePath2, format);
+    }
+    public static String getFilePath1() {
+        return filePath1;
+    }
+
+    public static String getFilePath2() {
+        return filePath2;
+    }
+
+    public static String getFormat() {
+        return format;
+    }
+
+    public static void setFilePath1(String filePath1) {
+        App.filePath1 = filePath1;
+    }
+
+    public static void setFilePath2(String filePath2) {
+        App.filePath2 = filePath2;
+    }
+
+    public static void setFormat(String format) {
+        App.format = format;
     }
 
     /**
