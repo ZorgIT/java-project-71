@@ -1,6 +1,5 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
@@ -44,11 +43,7 @@ public final class App implements Runnable {
 
     @Override
     public void run() {
-        try {
-            Differ.generate(filePath1, filePath2, format);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+        Differ.generate(filePath1, filePath2, format);
     }
 
     /**

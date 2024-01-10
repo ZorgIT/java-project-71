@@ -1,7 +1,5 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -20,7 +18,7 @@ public final class Differ {
 
     public static String generate(final String filePath1,
                                   final String filePath2,
-                                  final String format) throws JsonProcessingException {
+                                  final String format) {
         String[] contentType = filePath1.split("\\.");
 
 
@@ -50,7 +48,7 @@ public final class Differ {
     }
 
     public static String generate(final String filePath1,
-                                  final String filePath2) throws JsonProcessingException {
+                                  final String filePath2) {
         return generate(filePath1, filePath2, App.format);
     }
 
