@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
@@ -11,6 +12,22 @@ import java.util.Map;
 
 final class Parser {
     private Parser() {
+    }
+
+    public static Map<String, Object> parseObjects(final String content,
+                                                   final String contentType) throws Exception {
+        ObjectMapper objectMapper;
+        if (contentType.equalsIgnoreCase("json")) {
+            objectMapper = new ObjectMapper();
+        } else if (contentType.equalsIgnoreCase("yml")) {
+            objectMapper = new YAMLMapper();
+        } else {
+            throw new Exception("Unknown format: '" + contentType + "'");
+        }
+        Map<String, Object> dataMap = objectMapper.readValue(content,
+                new TypeReference<Map<String, Object>>() {
+                });
+        return dataMap;
     }
 
     public static Map<String, String> parseData(final String content,

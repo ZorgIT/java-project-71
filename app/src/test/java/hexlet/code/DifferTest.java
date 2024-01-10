@@ -1,6 +1,7 @@
 package hexlet.code;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
@@ -59,7 +60,7 @@ public class DifferTest {
     }
 
     @Test
-    void testGenerateStylish() {
+    void testGenerateStylish() throws JsonProcessingException {
         String expected = "{\n"
                 + "    chars1: [a, b, c]\n"
                 + "  - chars2: [d, e, f]\n"
@@ -91,7 +92,7 @@ public class DifferTest {
     }
 
     @Test
-    void testGeneratePlain() {
+    void testGeneratePlain() throws JsonProcessingException {
         App.format = "plain";
         String expected = "Property 'chars2' was updated. From [complex "
                 + "value] to false\n"

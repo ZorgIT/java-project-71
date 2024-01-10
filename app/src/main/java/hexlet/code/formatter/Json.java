@@ -1,30 +1,20 @@
 package hexlet.code.formatter;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.List;
+import java.util.Map;
 
 public class Json {
-    public static String formatToJson(List<List<String>> difference) {
-        List<String> jsonFormat = new ArrayList<>();
-        Iterator<List<String>> iterator = difference.iterator();
-        jsonFormat.add("{");
-        while (iterator.hasNext()) {
-            StringBuilder sb = new StringBuilder();
-            List<String> line1 = iterator.next();
-            String lineStatus = line1.get(0);
-            sb.append("  " + lineStatus + " " + line1.get(1)
-                    + ": " + line1.get(2).toString()
-                    .replace(",", ", ")
-                    .replace(":", "="));
-            jsonFormat.add(sb.toString());
-        }
+    public static String formatToJson(List<Map<String, Object>> difference) throws JsonProcessingException {
 
-        String jsonString = "";
-        for (String line : jsonFormat) {
-            jsonString += line + "\n";
-        }
-        jsonString += "}";
-        return jsonString;
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonFormat = mapper.writeValueAsString(difference);
+
+        return jsonFormat;
+
     }
 }
+
+

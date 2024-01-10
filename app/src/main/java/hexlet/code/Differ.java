@@ -1,5 +1,7 @@
 package hexlet.code;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -10,6 +12,7 @@ import java.util.List;
 import java.util.Comparator;
 
 import static hexlet.code.Parser.parseData;
+import static hexlet.code.Parser.parseObjects;
 
 public final class Differ {
     private Differ() {
@@ -17,24 +20,37 @@ public final class Differ {
 
     public static String generate(final String filePath1,
                                   final String filePath2,
-                                  final String format) {
+                                  final String format) throws JsonProcessingException {
         String[] contentType = filePath1.split("\\.");
-        List<List<String>> difference;
+
+
         try {
             String file1 = readFile(filePath1);
             String file2 = readFile(filePath2);
-            Map<String, String> map1 = parseData(file1, contentType[1]);
-            Map<String, String> map2 = parseData(file2, contentType[1]);
-            difference = checkData(map1, map2);
-            // Formatter.showDiff(difference, format);
+            if (format.equals("json")) {
+                Map<String, Object> map1 = parseObjects(file1, contentType[1]);
+                Map<String, Object> map2 = parseObjects(file1, contentType[1]);
+                String generated = Formatter.convertToFormat(ObjectComparator.diff(map1,
+                        map2), "json");
+                System.out.println(generated);
+                return generated;
+            } else {
+                Map<String, String> map1 = parseData(file1, contentType[1]);
+                Map<String, String> map2 = parseData(file2, contentType[1]);
+                List<List<String>> difference;
+                difference = checkData(map1, map2);
+                Formatter.showDiff(difference, format);
+                return Formatter.convertToFormat(difference, format);
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return Formatter.convertToFormat(difference, format);
+
+
     }
 
     public static String generate(final String filePath1,
-                                  final String filePath2) {
+                                  final String filePath2) throws JsonProcessingException {
         return generate(filePath1, filePath2, App.format);
     }
 

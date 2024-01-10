@@ -10,7 +10,7 @@ import static hexlet.code.formatter.Stylish.formatToStylish;
 
 public class Formatter {
 
-    static String convertToFormat(List<List<String>> difference, String format) {
+    static String convertToFormat(List difference, String format) throws JsonProcessingException {
         switch (format.toLowerCase()) {
             case "plain":
                 return formatToPlain(difference);
@@ -28,7 +28,7 @@ public class Formatter {
                 System.out.println(formatToPlain(difference));
                 break;
             case "json":
-                System.out.println(formatToJson(difference));
+                System.out.println();
                 break;
             default:
                 System.out.println(formatToStylish(difference));
