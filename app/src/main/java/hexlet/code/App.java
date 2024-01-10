@@ -14,20 +14,20 @@ public final class App implements Runnable {
      */
     @CommandLine.Parameters(index = "0",
             description = "Path to the first file")
-    String filePath1;
+    public static String filePath1;
     /**
      * Some text here.
      */
     @CommandLine.Parameters(index = "1",
             description = "Path to the second file")
-    String filePath2;
+    public static String filePath2;
     /**
      * Some text here.
      */
 
     @Option(names = {"-f", "--format"}, description = "Output format "
             + "[default: stylish]")
-    protected static String format = "stylish";
+    public static  String format = "stylish";
     /**
      * Some text here.
      */
